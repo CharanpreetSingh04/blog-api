@@ -1,0 +1,53 @@
+<div>
+    <h1>Comments</h1>
+    <a style="margin-right: 0" href="/users/logout" class="btn btn-secondary">Logout</a>
+</div>
+
+
+{{#if success_msg.length}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{success_msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/if}}
+{{#if error_msg.length}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{error_msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/if}}
+
+
+<form action="/users/comments/{{id}}" method="POST">
+        
+        <div class="form-group">
+          <label for="description">Leave Comments</label>
+          <textarea
+            type="text"
+            id="comment"
+            name="comment"
+            class="form-control"
+            placeholder="write comment"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Post comment
+        </button>
+</form>
+
+<div style="margin-top: 100px;">
+
+{{#each comments}}
+        <div style="text-decoration:none" class="alert alert-success fade show"  role="alert" >
+                {{this.comment}} 
+        </div>
+        <div style="text-align: right;">
+          <h5>{{this.user}}</h5>
+          <h6>{{this.time}}</h6>
+        </div>
+    
+    
+    
+    <hr/>
+{{/each}}
+

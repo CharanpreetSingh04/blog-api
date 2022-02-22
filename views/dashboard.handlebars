@@ -1,0 +1,61 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome {{name}}</p>
+
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+{{#if success_msg.length}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{success_msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/if}}
+{{#if error_msg.length}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{error_msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/if}}
+
+<form action="/users/messages" method="POST">
+        <div class="form-group">
+          <label for="name">Blog Title</label>
+          <input
+            type="name"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="Enter title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Blog Description</label>
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            class="form-control"
+            placeholder="Enter Description"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Post Blog
+        </button>
+</form>
+<div style="margin-top: 100px;">
+
+</div>
+{{#each messages}}
+        <div style="text-decoration:none;text-align:center;margin-top: 30px;" class="alert alert-warning fade show"  role="alert" >
+                    <h1>{{this.name}}</h1>
+
+        </div>
+        <div style="text-align: right;">
+            <h5>{{this.user}}</h5>
+            <h6>{{this.time}}</h6>
+        </div>
+        <div style="text-decoration:none" class="alert alert-success fade show"  role="alert" >
+                    {{this.description}}
+
+        </div>
+        <a href="/users/comments/{{this._id}}" class="btn btn-secondary">Comments</a>    
+    <hr/>
+{{/each}}
